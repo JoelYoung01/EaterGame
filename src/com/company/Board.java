@@ -47,6 +47,7 @@ public class Board extends JPanel implements ActionListener, Commons
             // make a new rock and set intersects value
             Rock rock = new Rock();
             boolean intersects = false;
+
             // while the intersects value is still true, reset the rock coordinates
             do {
                 for (Prey prey : prey) intersects = intersects || prey.touches(rock);
@@ -54,7 +55,6 @@ public class Board extends JPanel implements ActionListener, Commons
             } while (intersects);
 
             // since the rock is unique, add it to the preylist
-            System.out.println("adding rock at (" + rock.getX() + ", " + rock.getY() + ")");
             prey.add(rock);
         }
 
@@ -88,7 +88,7 @@ public class Board extends JPanel implements ActionListener, Commons
         Prey temp = null;
         for (Prey preyItem : prey) {
             // for each prey, check if they intersect
-            // if the player overlaps the prey more than the required threshold, go in
+            // If the player overlaps the prey more than the required threshold, go in
             if (player.touches(preyItem) && player.overlap(preyItem) >= preyItem.requiredOverlap(player) && player.getSize() >= preyItem.getSize())
             {
                 // block to choose what new object to spawn in
@@ -109,9 +109,12 @@ public class Board extends JPanel implements ActionListener, Commons
             prey.add(temp);
         }
 
-        //remove eaten prey from the list
+        //remove non-visible prey from the list
         for (int i = 0; i < prey.size(); i++){
-            if (!prey.get(i).isVisible()) { prey.remove(i); i--; }
+            if (!prey.get(i).isVisible())
+            {
+                prey.remove(i); i--;
+            }
         }
 
         //check enemy collisions
@@ -178,6 +181,7 @@ public class Board extends JPanel implements ActionListener, Commons
         for (Enemy enemy : enemies) enemy.increaseVision(factor);
     }
 
+    @Override
     public void update(Graphics g)
     {
         //check for collisions

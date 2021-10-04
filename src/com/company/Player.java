@@ -1,5 +1,7 @@
 package com.company;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Player extends Sprite implements Commons
@@ -26,6 +28,17 @@ public class Player extends Sprite implements Commons
         imagePath = "images/player/player0.png";
         setImage(imagePath);
     }
+
+    @Override
+    public void setImage(String path) {
+        ImageIcon ii = new ImageIcon(path);
+
+        Image scaledImage = ii.getImage().getScaledInstance(size * 50, -1, Image.SCALE_AREA_AVERAGING);
+        while (scaledImage.getHeight(null) < 0 && scaledImage.getWidth(null) < 0) {}
+
+        setImage(scaledImage);
+    }
+
     public void act()
     {
         if (stomach >= full) grow();
@@ -48,19 +61,13 @@ public class Player extends Sprite implements Commons
         fullScore += s.getBonus();
         s.kill();
     }
+
     public void hurt(double damage)
     {
         stomach -= damage;
         score -= damage;
         if (stomach < 0) shrink();
     }
-/*
-    BufferedImage resizeImage(BufferedImage originalImage, int targetWidth, int targetHeight) throws IOException {
-        Image resultingImage = originalImage.getScaledInstance(targetWidth, targetHeight, Image.SCALE_DEFAULT);
-        BufferedImage outputImage = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
-        outputImage.getGraphics().drawImage(resultingImage, 0, 0, null);
-        return outputImage;
-    } */
 
     private void grow()
     {

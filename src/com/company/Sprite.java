@@ -26,16 +26,17 @@ public abstract class Sprite implements Commons
         addy = 0;
         suby = 0;
     }
-    public Sprite() {this(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);}
+    public Sprite() { this(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2); }
 
     public void setX(int x) { this.x = x; }
     public void setY(int y) { this.y = y; }
     public void kill() { visible = false; }
     public void setImage(Image image) {
         this.image = image;
-        width = getImage().getWidth(null);
-        height = getImage().getHeight(null);
+        width = image.getWidth(null);
+        height = image.getHeight(null);
     }
+
     public void setImage(String path) {
         ImageIcon ii = new ImageIcon(path);
         setImage(ii.getImage());
@@ -57,7 +58,8 @@ public abstract class Sprite implements Commons
         x = (int)(Math.random() * (WINDOW_WIDTH-width-10)+10);
         y = (int)(Math.random() * (WINDOW_HEIGHT-height-10)+10);
     }
-    public boolean touches(Sprite s) {
+    public boolean touches(Sprite s)
+    {
         return getBox().intersects(s.getBox());
     }
 
