@@ -2,6 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.security.InvalidParameterException;
 
 public abstract class Sprite implements Commons
 {
@@ -32,6 +33,10 @@ public abstract class Sprite implements Commons
     public void setY(int y) { this.y = y; }
     public void kill() { visible = false; }
     public void setImage(Image image) {
+        if (image.getHeight(null) < 0 || image.getWidth(null) < 0) {
+            throw new InvalidParameterException("The image had an invalid width or height");
+        }
+
         this.image = image;
         width = image.getWidth(null);
         height = image.getHeight(null);
