@@ -34,7 +34,12 @@ public class Player extends Sprite implements Commons
         ImageIcon ii = new ImageIcon(path);
 
         Image scaledImage = ii.getImage().getScaledInstance(size * 50, -1, Image.SCALE_AREA_AVERAGING);
-        while (scaledImage.getHeight(null) < 0 && scaledImage.getWidth(null) < 0) {}    // Wait for the image to be loaded, pretty garbage solution though
+
+        int waitCount = 0;
+        while (scaledImage.getHeight(null) < 0 && scaledImage.getWidth(null) < 0) {
+            // Wait for the image to be loaded, pretty garbage solution though
+            waitCount++;
+        }
 
         setImage(scaledImage);
     }
