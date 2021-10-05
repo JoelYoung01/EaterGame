@@ -101,11 +101,15 @@ public class Board extends JPanel implements ActionListener, Commons
                 else if (player.getScore() >= 75 && preyItem.getType().equals("stump")) temp = new smallTree();
                 else if (player.getScore() >= 105 && preyItem.getType().equals("smallTree")) temp = new tree();
                 else if (player.getScore() >= 145 && preyItem.getType().equals("bigTree")) temp = new empty();
-                else { temp = preyItem.duplicate(); }
+                else {
+                    temp = preyItem.duplicate();
+                }
                 player.eat(preyItem);
             }
         }
-        if (temp != null) {
+        if (temp != null)
+        {
+            temp.setVisible(true);
             prey.add(temp);
         }
 

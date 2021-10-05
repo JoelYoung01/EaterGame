@@ -48,6 +48,7 @@ public abstract class Sprite implements Commons
     }
 
     public boolean isVisible() { return visible; }
+    public void setVisible(boolean visibility) { this.visible = visibility; }
     public Image getImage() { return image; }
     public int getX() { return x; }
     public int getY() { return y; }
